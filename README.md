@@ -1,202 +1,66 @@
-# 独立开发者工作管理应用
+# Work Management App for Independent Developers
 
-这是一个为独立开发者设计的工作管理应用，帮助记录工作内容、工作时长并提供统计分析，优化工作效率。
+This application helps independent developers manage their work, track time spent on tasks, and analyze productivity.
 
-## 项目文档规范
+## Features
 
-本项目采用以下文档规范，确保项目有序进行：
+- User authentication
+- Task management
+- Time tracking
+- Productivity analysis
 
-### 1. 项目目录结构
+## Installation
 
-```
-project/
-├── docs/                          # 项目文档目录
-│   ├── requirements/              # 需求文档
-│   │   ├── requirements.md        # 需求说明文档
-│   │   └── user_stories.md        # 用户故事
-│   ├── architecture/              # 架构文档
-│   │   ├── system_design.md       # 系统设计文档
-│   │   └── tech_stack.md          # 技术栈说明
-│   ├── technical/                 # 技术方案文档
-│   │   ├── frontend.md            # 前端技术方案
-│   │   └── backend.md             # 后端技术方案
-│   └── iterations/                # 迭代记录
-│       ├── iteration_1.md         # 第一次迭代记录
-│       └── ...                    # 更多迭代记录
-├── src/                           # 源代码目录
-├── public/                        # 公共资源目录
-└── README.md                      # 项目说明文档
-```
+1. Clone the repository:
+   ```
+   git clone https://github.com/yourusername/work-management-app.git
+   ```
 
-### 2. 文档模板规范
+2. Install dependencies:
+   ```
+   cd work-management-app
+   npm install
+   ```
 
-#### 2.1 需求文档规范
+3. Create a `.env` file in the root directory with the following variables:
+   ```
+   PORT=3000
+   MONGODB_URI=mongodb://localhost:27017/work_management
+   JWT_SECRET=your_secret_key_here
+   ```
 
-需求文档应包含以下内容：
-- 项目背景
-- 目标用户
-- 核心功能需求
-- 非功能性需求(性能、安全等)
-- 验收标准
-- 优先级排序
+4. Start the server:
+   ```
+   npm start
+   ```
 
-#### 2.2 用户故事规范
+## Project Structure
 
-使用以下格式编写用户故事：
-```
-作为[角色]，我希望[功能]，以便[价值/目的]
-```
+- `config/`: Configuration files
+- `controllers/`: Request handlers
+- `middleware/`: Custom middleware functions
+- `models/`: Database models
+- `routes/`: API routes
+- `utils/`: Utility functions
+- `app.js`: Express application setup
+- `server.js`: Server entry point
 
-#### 2.3 架构文档规范
+## API Endpoints
 
-架构文档应包含：
-- 系统整体架构图
-- 主要模块及其关系
-- 数据流图
-- 技术选型及理由
+### Authentication
+- `POST /api/v1/auth/register`: Register a new user
+- `POST /api/v1/auth/login`: Login
+- `POST /api/v1/auth/logout`: Logout
 
-#### 2.4 技术方案文档规范
+### Tasks
+- `GET /api/v1/tasks`: Get all tasks
+- `GET /api/v1/tasks/:id`: Get a specific task
+- `POST /api/v1/tasks`: Create a new task
+- `PUT /api/v1/tasks/:id`: Update a task
+- `DELETE /api/v1/tasks/:id`: Delete a task
 
-技术方案文档应包含：
-- 具体实现方案
-- 接口设计
-- 数据库设计
-- 关键算法说明
-- 安全性考虑
-
-#### 2.5 迭代记录规范
-
-每次迭代记录应包含：
-- 迭代目标
-- 完成的功能点
-- 遇到的问题及解决方案
-- 下一步计划
-- 时间节点记录
-
-### 3. 版本控制规范
-
-提交信息格式：
-```
-<类型>: <简短描述>
-
-<详细描述>
-```
-
-类型包括：
-- feat: 新功能
-- fix: 修复bug
-- docs: 文档更新
-- style: 格式调整，不影响代码逻辑
-- refactor: 代码重构
-- test: 测试相关
-- chore: 构建过程或辅助工具的变动
-
-### 4. 需求变更规范
-
-需求变更需要记录：
-- 变更原因
-- 变更内容
-- 影响范围
-- 预计工作量
-- 优先级评估
-
-## 项目角色职责与文档管理
-
-### 1. 产品经理
-
-**职责**：
-- 需求收集与分析
-- 产品规划与路线图制定
-- 用户故事编写
-- 产品验收标准制定
-- 用户反馈收集与分析
-
-**文档交付时间点**：
-- **项目启动前**：完成初步需求文档和用户故事
-- **迭代规划会前**：完成本次迭代的详细需求说明和用户故事
-- **需求变更时**：在变更确认后24小时内更新需求文档
-- **迭代结束后**：收集用户反馈，更新产品路线图
-
-### 2. 系统架构师
-
-**职责**：
-- 系统架构设计
-- 技术选型
-- 系统安全性评估
-- 性能与可扩展性设计
-
-**文档交付时间点**：
-- **需求确认后**：完成系统架构设计文档
-- **技术选型完成后**：更新技术栈文档
-- **架构调整时**：在调整确认后48小时内更新架构文档
-- **每季度**：进行架构审查和更新
-
-### 3. 前端开发工程师
-
-**职责**：
-- UI/UX实现
-- 前端功能开发
-- 前端性能优化
-- 前端测试
-
-**文档交付时间点**：
-- **架构确认后**：完成前端技术方案文档
-- **每次迭代开始前**：更新前端实现计划
-- **功能开发完成后**：更新前端技术文档和API使用说明
-- **每次关键UI变更后**：更新UI组件文档
-
-### 4. 后端开发工程师
-
-**职责**：
-- API设计与实现
-- 数据库设计
-- 后端服务开发
-- 系统集成
-
-**文档交付时间点**：
-- **架构确认后**：完成后端技术方案和数据库设计文档
-- **API设计完成后**：更新API文档
-- **每次迭代开始前**：更新后端实现计划
-- **功能开发完成后**：更新后端技术文档和API使用说明
-
-### 5. 测试工程师
-
-**职责**：
-- 测试计划制定
-- 用例设计
-- 功能测试执行
-- 缺陷管理
-
-**文档交付时间点**：
-- **需求确认后**：完成测试计划
-- **开发启动前**：完成测试用例设计
-- **每次迭代结束前**：提交测试报告
-- **产品发布前**：提交完整测试总结报告
-
-### 6. 项目经理
-
-**职责**：
-- 项目计划制定
-- 资源协调
-- 风险管理
-- 项目进度跟踪
-- 文档完整性审查
-
-**文档交付时间点**：
-- **项目启动前**：完成项目计划文档
-- **每次迭代开始前**：更新迭代计划文档
-- **每周**：提交项目进度报告
-- **每次迭代结束后**：更新迭代记录文档
-- **项目里程碑节点**：提交里程碑总结报告
-
-## 文档评审流程
-
-1. **文档提交**：负责人按照时间点提交相应文档
-2. **初步审查**：项目经理进行文档完整性和规范性审查
-3. **团队评审**：相关团队成员参与文档评审会议
-4. **修改更新**：根据评审意见修改文档
-5. **最终确认**：项目经理确认文档符合要求后归档
-
-## 项目启动
-
-首先我们将进行需求讨论，明确项目的目标和范围，随后逐步完善项目文档并开始开发。 
+### Time Records
+- `POST /api/v1/time-records/start`: Start timer
+- `POST /api/v1/time-records/:id/pause`: Pause timer
+- `POST /api/v1/time-records/:id/resume`: Resume timer
+- `POST /api/v1/time-records/:id/stop`: Stop timer 

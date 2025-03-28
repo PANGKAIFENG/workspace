@@ -16,8 +16,8 @@ const taskSchema = new mongoose.Schema({
   },
   tags: [{ type: String }],
   dueDate: { type: Date },
-  estimatedTime: { type: Number }, // 估计完成时间(分钟)
-  actualTime: { type: Number, default: 0 }, // 实际花费时间(分钟)
+  estimatedTime: { type: Number }, // Estimated time in minutes
+  actualTime: { type: Number, default: 0 }, // Actual time spent in minutes
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now }
 });

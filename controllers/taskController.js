@@ -1,6 +1,6 @@
 const Task = require('../models/Task');
 
-// 获取所有任务
+// Get all tasks
 exports.getAllTasks = async (req, res) => {
   try {
     const tasks = await Task.find({ user: req.user.id });
@@ -10,10 +10,37 @@ exports.getAllTasks = async (req, res) => {
   }
 };
 
-// 创建新任务
+// Get one task
+exports.getTask = async (req, res) => {
+  try {
+    const task = await Task.findOne({ 
+      _id: req.params.id, 
+      user: req.user.id 
+    });
+    
+    if (!task) {
+      return res.status(404).json({ error: 'Task not found' });
+    }
+    
+    res.json(task);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
+// Create a new task
 exports.createTask = async (req, res) => {
   try {
-    const { title, description, status, priority, tags, dueDate, estimatedTime } = req.body;
+    const { 
+      title, 
+      description, 
+      status, 
+      priority, 
+      tags, 
+      dueDate, 
+      estimatedTime 
+    } = req.body;
+    
     const task = new Task({
       title,
       description,
@@ -24,6 +51,7 @@ exports.createTask = async (req, res) => {
       dueDate,
       estimatedTime
     });
+    
     await task.save();
     res.status(201).json(task);
   } catch (error) {
@@ -31,7 +59,7 @@ exports.createTask = async (req, res) => {
   }
 };
 
-// 更新任务
+// Update a task
 exports.updateTask = async (req, res) => {
   try {
     const task = await Task.findOneAndUpdate(
@@ -39,22 +67,29 @@ exports.updateTask = async (req, res) => {
       req.body,
       { new: true }
     );
+    
     if (!task) {
       return res.status(404).json({ error: 'Task not found' });
     }
+    
     res.json(task);
   } catch (error) {
     res.status(400).json({ error: error.message });
   }
 };
 
-// 删除任务
+// Delete a task
 exports.deleteTask = async (req, res) => {
   try {
-    const task = await Task.findOneAndDelete({ _id: req.params.id, user: req.user.id });
+    const task = await Task.findOneAndDelete({ 
+      _id: req.params.id, 
+      user: req.user.id 
+    });
+    
     if (!task) {
       return res.status(404).json({ error: 'Task not found' });
     }
+    
     res.json({ message: 'Task deleted successfully' });
   } catch (error) {
     res.status(500).json({ error: error.message });

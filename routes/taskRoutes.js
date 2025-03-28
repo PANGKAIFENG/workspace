@@ -3,9 +3,12 @@ const router = express.Router();
 const taskController = require('../controllers/taskController');
 const authMiddleware = require('../middleware/authMiddleware');
 
-router.get('/', authMiddleware, taskController.getAllTasks);
-router.post('/', authMiddleware, taskController.createTask);
-router.put('/:id', authMiddleware, taskController.updateTask);
-router.delete('/:id', authMiddleware, taskController.deleteTask);
+router.use(authMiddleware); // Protect all task routes
+
+router.get('/', taskController.getAllTasks);
+router.get('/:id', taskController.getTask);
+router.post('/', taskController.createTask);
+router.put('/:id', taskController.updateTask);
+router.delete('/:id', taskController.deleteTask);
 
 module.exports = router; 
